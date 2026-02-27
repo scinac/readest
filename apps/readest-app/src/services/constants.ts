@@ -257,6 +257,7 @@ export const DEFAULT_VIEW_CONFIG: ViewConfig = {
   showRemainingTime: false,
   showRemainingPages: false,
   showProgressInfo: true,
+  showCurrentTime: true,
   tapToToggleFooter: false,
   showMarginsOnScroll: false,
   showPaginationButtons: false,
