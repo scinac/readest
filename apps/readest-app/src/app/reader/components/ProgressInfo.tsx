@@ -223,5 +223,6 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
       </div>
     </div>
   );
+};
 
 export default ProgressInfoView;
