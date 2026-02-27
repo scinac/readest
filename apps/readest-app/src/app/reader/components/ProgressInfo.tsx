@@ -8,7 +8,7 @@ import { useBookDataStore } from '@/store/bookDataStore';
 import { formatNumber, formatProgress } from '@/utils/progress';
 import { saveViewSettings } from '@/helpers/settings';
 import { SIZE_PER_LOC, SIZE_PER_TIME_UNIT } from '@/services/constants';
-import { useCurrentTime } from '../hooks/useCurrentTime';
+import StatusBar from './StatusBar.tsx'
 
 interface PageInfoProps {
   bookKey: string;
@@ -78,10 +78,6 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
       : '';
 
   const [progressInfoMode, setProgressInfoMode] = useState(viewSettings.progressInfoMode);
-
-  const showCurrentTime = viewSettings.showCurrentTime;
-  const formattedTime = useCurrentTime(showCurrentTime)
-
 
   const cycleProgressInfoModes = () => {
     if (!viewSettings.tapToToggleFooter) return;
@@ -174,31 +170,36 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
           isVertical ? 'h-full' : 'h-[52px] w-full',
         )}
       >
-        {(progressInfoMode === 'all' || progressInfoMode === 'remaining') && (
-          <>
-            {viewSettings.showRemainingTime ? (
-              <span className='text-start'>{timeLeftStr}</span>
-            ) : viewSettings.showRemainingPages ? (
-              <span className='text-start'>{pagesLeftStr}</span>
-            ) : null}
-          </>
-        )}
+        <div className="flex-1 text-start overflow-hidden whitespace-nowrap">
+          {(progressInfoMode === 'all' || progressInfoMode === 'remaining') && (
+            <>
+              {viewSettings.showRemainingTime ? (
+                <span className='text-start'>{timeLeftStr}</span>
+              ) : viewSettings.showRemainingPages ? (
+                <span className='text-start'>{pagesLeftStr}</span>
+              ) : null}
+            </>
+          )}
+        </div>
 
-        {showCurrentTime && (
-          <span className={clsx('text-end', isVertical ? 'mt-auto' : 'ms-auto')}>
-            {formattedTime}
-          </span>
-        )}
+        <StatusBar
+          showTime={viewSettings.showCurrentTime}
+          use24Hour={viewSettings.use24HourClock}
+          showBattery={viewSettings.showCurrentBatteryStatus}
+          isVertical={isVertical}
+        />
 
-        {(progressInfoMode === 'all' || progressInfoMode === 'progress') && (
-          <>
-            {viewSettings.showProgressInfo && (
-              <span className={clsx('text-end', isVertical ? 'mt-auto' : 'ms-auto')}>
-                {progressInfo}
-              </span>
-            )}
-          </>
-        )}
+        <div className="flex-1 text-end overflow-hidden whitespace-nowrap">
+          {(progressInfoMode === 'all' || progressInfoMode === 'progress') && (
+            <>
+              {viewSettings.showProgressInfo && (
+                <span className={clsx('text-end', isVertical ? 'mt-auto' : 'ms-auto')}>
+                  {progressInfo}
+                </span>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

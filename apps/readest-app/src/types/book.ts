@@ -202,6 +202,8 @@ export interface ViewConfig {
   showRemainingPages: boolean;
   showProgressInfo: boolean;
   showCurrentTime: boolean;
+  use24HourClock: boolean;
+  showCurrentBatteryStatus: boolean;
   tapToToggleFooter: boolean;
   showBarsOnScroll: boolean;
   showMarginsOnScroll: boolean;
