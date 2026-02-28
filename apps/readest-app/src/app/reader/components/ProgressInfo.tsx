@@ -9,7 +9,7 @@ import { useBookDataStore } from '@/store/bookDataStore';
 import { formatNumber, formatProgress } from '@/utils/progress';
 import { saveViewSettings } from '@/helpers/settings';
 import { SIZE_PER_LOC, SIZE_PER_TIME_UNIT } from '@/services/constants';
-import StatusBar from './StatusBar.tsx'
+import StatusBar from './StatusBar.tsx';
 
 interface PageInfoProps {
   bookKey: string;
@@ -59,23 +59,22 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
   const timeLeftStr =
     total - 1 > current
       ? _('{{time}} min left in chapter', {
-        time: formatNumber(
-          Math.round((pagesLeft * SIZE_PER_LOC) / SIZE_PER_TIME_UNIT),
-          localize,
-          lang,
-        ),
-      })
+          time: formatNumber(
+            Math.round((pagesLeft * SIZE_PER_LOC) / SIZE_PER_TIME_UNIT),
+            localize,
+            lang,
+          ),
+        })
       : '';
   const pagesLeftStr =
     total - 1 > current
       ? localize
         ? _('{{number}} pages left in chapter', {
-          number: formatNumber(pagesLeft, localize, lang),
-        })
-
+            number: formatNumber(pagesLeft, localize, lang),
+          })
         : _('{{count}} pages left in chapter', {
-          count: pagesLeft,
-        })
+            count: pagesLeft,
+          })
       : '';
 
   const showPagesLeft = total - 1 > current;
@@ -140,9 +139,9 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
       aria-label={[
         progress
           ? _('On {{current}} of {{total}} page', {
-            current: current + 1,
-            total: total,
-          })
+              current: current + 1,
+              total: total,
+            })
           : '',
         timeLeftStr,
         pagesLeftStr,
@@ -152,18 +151,18 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
       style={
         isVertical
           ? {
-            bottom: `${(contentInsets.bottom - gridInsets.bottom) * 1.5}px`,
-            left: showDoubleBorder
-              ? `calc(${contentInsets.left}px)`
-              : `calc(${Math.max(0, contentInsets.left - 32)}px)`,
-            width: showDoubleBorder ? '32px' : `${contentInsets.left}px`,
-            height: `calc(100% - ${((contentInsets.top + contentInsets.bottom) / 2) * 3}px)`,
-          }
+              bottom: `${(contentInsets.bottom - gridInsets.bottom) * 1.5}px`,
+              left: showDoubleBorder
+                ? `calc(${contentInsets.left}px)`
+                : `calc(${Math.max(0, contentInsets.left - 32)}px)`,
+              width: showDoubleBorder ? '32px' : `${contentInsets.left}px`,
+              height: `calc(100% - ${((contentInsets.top + contentInsets.bottom) / 2) * 3}px)`,
+            }
           : {
-            paddingInlineStart: `calc(${horizontalGap / 2}% + ${contentInsets.left / 2}px)`,
-            paddingInlineEnd: `calc(${horizontalGap / 2}% + ${contentInsets.right / 2}px)`,
-            paddingBottom: appService?.hasSafeAreaInset ? `${gridInsets.bottom * 0.33}px` : 0,
-          }
+              paddingInlineStart: `calc(${horizontalGap / 2}% + ${contentInsets.left / 2}px)`,
+              paddingInlineEnd: `calc(${horizontalGap / 2}% + ${contentInsets.right / 2}px)`,
+              paddingBottom: appService?.hasSafeAreaInset ? `${gridInsets.bottom * 0.33}px` : 0,
+            }
       }
     >
       <div
@@ -173,7 +172,7 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
           isVertical ? 'h-full' : 'h-[52px] w-full',
         )}
       >
-        <div className="flex-1 text-start overflow-hidden whitespace-nowrap">
+        <div className='flex-1 overflow-hidden whitespace-nowrap text-start'>
           {(progressInfoMode === 'all' || progressInfoMode === 'remaining') && (
             <>
               {viewSettings.showRemainingTime ? (
@@ -207,12 +206,15 @@ const ProgressInfoView: React.FC<PageInfoProps> = ({
           isVertical={isVertical}
         />
 
-        <div className="flex-1 text-end overflow-hidden whitespace-nowrap">
+        <div className='flex-1 overflow-hidden whitespace-nowrap text-end'>
           {(progressInfoMode === 'all' || progressInfoMode === 'progress') && (
             <>
               {viewSettings.showProgressInfo && (
                 <span
-                  className={clsx('progress-info-label text-end', isVertical ? 'mt-auto' : 'ms-auto')}
+                  className={clsx(
+                    'progress-info-label text-end',
+                    isVertical ? 'mt-auto' : 'ms-auto',
+                  )}
                 >
                   {progressInfo}
                 </span>
